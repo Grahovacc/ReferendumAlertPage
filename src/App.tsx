@@ -16,38 +16,40 @@ import { FaTelegramPlane } from "react-icons/fa";
 import styles from "./App.module.scss";
 
 const BOT_LINK = "https://t.me/ref_alert_bot";
+const GITHUB_REPO = "https://github.com/Grahovacc/ReferendumAlert";
+const DOCS_LINK = `${GITHUB_REPO}#readme`;
 
 type Feature = { icon: React.ComponentType<any>; title: string; desc: string };
 const features: Feature[] = [
   {
     icon: Bell,
     title: "Real-time vote alerts",
-    desc: "Instant Telegram pings when Aye/Nay/Abstain lands.",
+    desc: "Instant Telegram notifications when Aye/Nay/Abstain lands.",
   },
   {
     icon: Users,
     title: "Group-ready",
-    desc: "Add the bot to DAO groups to keep everyone synced.",
+    desc: "Add the bot to DAO/group chats so everyone stays in sync.",
   },
   {
     icon: Clock3,
-    title: "Every minute checks",
-    desc: "Minute-level refresh for Polkadot & Kusama.",
+    title: "Minute-level checks",
+    desc: "Polls every minute for Polkadot & Kusama OpenGov.",
   },
   {
     icon: BarChart3,
     title: "Useful context",
-    desc: "Conviction, power in DOT/KSM, voter short address, links.",
+    desc: "Conviction, voting power (DOT/KSM), short address, and links.",
   },
   {
     icon: ShieldCheck,
     title: "Reliable infra",
-    desc: "Cloudflare Workers + KV: fast, de-duped alerts.",
+    desc: "Cloudflare Workers + KV for fast, de-duplicated alerts.",
   },
   {
     icon: Globe2,
-    title: "OpenGov native",
-    desc: "Watch any referendum by ID (Treasury & more).",
+    title: "OpenGov-native",
+    desc: "Watch any referendum by ID (Treasury and more).",
   },
 ];
 
@@ -64,7 +66,7 @@ function Hero() {
     <section className={styles.hero}>
       <div className={styles.heroInner}>
         <span className={styles.badge}>
-          <Bell size={16} /> Referendum Alert for Polkadot Treasury
+          <Bell size={16} /> Referendum Alert — Polkadot & Kusama
         </span>
         <motion.h1
           initial={{ opacity: 0, y: 8 }}
@@ -72,11 +74,11 @@ function Hero() {
           transition={{ duration: 0.4 }}
           className={styles.h1}
         >
-          Never miss a vote that moves funding
+          Never miss a referendum vote again
         </motion.h1>
         <p className={styles.sub}>
-          Real-time Telegram alerts for Polkadot Treasury referenda. See votes
-          as they land — with conviction, power, and links.
+          Real-time Telegram alerts for OpenGov referenda. See votes as they
+          land — conviction, voting power, addresses, and links included.
         </p>
         <div className={styles.ctaRow}>
           <a
@@ -92,9 +94,7 @@ function Hero() {
             See how it works <ChevronRight size={16} />
           </a>
         </div>
-        <p className={styles.note}>
-          Works with Polkadot OpenGov. Supports Kusama too.
-        </p>
+        <p className={styles.note}>Works with Polkadot OpenGov and Kusama.</p>
       </div>
     </section>
   );
@@ -151,15 +151,17 @@ function HowItWorks() {
         <div>
           <h2>Simple, fast, and made for governance</h2>
           <p>
-            Set it once and let alerts do the rest. Designed for core
-            contributors, treasury curators, and DAO ops.
+            Set it once and let alerts do the rest. Built for core contributors,
+            treasury curators, and DAO ops.
           </p>
           <ol className={styles.steps}>
             <li>
               <span>1</span>
               <div>
                 <b>Start the bot</b>
-                <p>Open Telegram and tap Start.</p>
+                <p>
+                  Open Telegram and tap <b>Start</b>.
+                </p>
               </div>
             </li>
             <li>
@@ -167,7 +169,7 @@ function HowItWorks() {
               <div>
                 <b>Watch a referendum</b>
                 <p>
-                  Send <code>/watch &lt;id&gt;</code> (e.g. 1759).
+                  Send <code>/watch &lt;id&gt;</code> (e.g., <code>1759</code>).
                 </p>
               </div>
             </li>
@@ -175,7 +177,7 @@ function HowItWorks() {
               <span>3</span>
               <div>
                 <b>Share to groups</b>
-                <p>Add the bot to your DAO/group.</p>
+                <p>Add the bot to your DAO/group and use the same commands.</p>
               </div>
             </li>
           </ol>
@@ -188,7 +190,14 @@ function HowItWorks() {
             >
               Try the bot <ExternalLink size={16} />
             </a>
-
+            <a
+              href={GITHUB_REPO}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.secondaryCta}
+            >
+              View on GitHub <ExternalLink size={16} />
+            </a>
             <span className={styles.smallNote}>
               No signup • Ready in minutes
             </span>
@@ -197,17 +206,23 @@ function HowItWorks() {
         <div className={styles.rightCol}>
           <CopyableCommands />
           <div className={styles.howCards}>
+            <a
+              href={GITHUB_REPO}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.howCard}
+            >
+              <CheckCircle2 size={16} /> Open source
+              <ExternalLink size={14} />
+            </a>
             <div className={styles.howCard}>
-              <CheckCircle2 size={16} /> Clean alerts — no duplicates (KV).
+              <CheckCircle2 size={16} /> Clean alerts
             </div>
             <div className={styles.howCard}>
-              <CheckCircle2 size={16} /> Open source — link your GitHub repo.
+              <CheckCircle2 size={16} /> Optimized for governance use
             </div>
             <div className={styles.howCard}>
-              <CheckCircle2 size={16} /> Treasury-ready — Grants & OpenGov.
-            </div>
-            <div className={styles.howCard}>
-              <CheckCircle2 size={16} /> Multi-network — Polkadot & Kusama.
+              <CheckCircle2 size={16} /> Supports Polkadot & Kusama
             </div>
           </div>
         </div>
@@ -221,30 +236,34 @@ function FAQ() {
     <section className={styles.faq}>
       <h2>FAQ</h2>
       <details>
-        <summary>Does it work for Polkadot Treasury only?</summary>
+        <summary>Does it work only for Polkadot Treasury?</summary>
         <p>
           It’s optimized for Treasury referenda, but you can watch other OpenGov
-          tracks by ID (including Kusama).
+          tracks by ID — including on Kusama.
         </p>
       </details>
       <details>
         <summary>What information do alerts include?</summary>
         <p>
           Aye/Nay/Abstain, conviction, voter short address, voting power
-          (DOT/KSM), and a link to Polkassembly/Subscan.
+          (DOT/KSM), and a link to explorers (e.g., Polkassembly/Subscan).
         </p>
       </details>
       <details>
         <summary>Can I add it to a Telegram group?</summary>
         <p>
-          Yes. Add the bot with permission to post messages and run the same
+          Yes. Add the bot with permission to post messages, then use the same
           commands in the group.
         </p>
       </details>
       <details>
         <summary>Is the code open source?</summary>
         <p>
-          Yes. Link your GitHub repo for transparency in Treasury proposals.
+          Yes — find the repository here:{" "}
+          <a href={GITHUB_REPO} target="_blank" rel="noopener noreferrer">
+            {GITHUB_REPO}
+          </a>
+          .
         </p>
       </details>
     </section>
@@ -255,14 +274,19 @@ function Footer() {
   return (
     <footer className={styles.footer}>
       <div>
-        © {new Date().getFullYear()} ProposalAlert — Built for Polkadot OpenGov
+        © {new Date().getFullYear()} Referendum Alert — Built for Polkadot
+        OpenGov
       </div>
       <div className={styles.footerLinks}>
         <a href={BOT_LINK} target="_blank" rel="noopener noreferrer">
-          Start in Telegram
+          Start using Bot
         </a>
-        <a href="#">GitHub</a>
-        <a href="#">Docs</a>
+        <a href={GITHUB_REPO} target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+        <a href={DOCS_LINK} target="_blank" rel="noopener noreferrer">
+          Docs
+        </a>
       </div>
     </footer>
   );

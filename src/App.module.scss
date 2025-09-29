@@ -212,6 +212,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
+  margin-top: -20px;
   h4 {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.85);
@@ -277,8 +278,6 @@
 
 /* FOOTER */
 .footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  background: #0b0b12;
   display: flex;
   gap: 12px;
   justify-content: space-between;
