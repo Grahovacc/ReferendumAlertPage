@@ -172,7 +172,7 @@ function HowItWorks() {
                 <b>Watch a referendum</b>
                 <p>
                   Send <code>/watch &lt;id&gt; [dot|ksm]</code> (e.g.,{" "}
-                  <code>/watch 1759 dot</code>).
+                  <code>/watch 1702 dot</code>).
                 </p>
               </div>
             </li>
