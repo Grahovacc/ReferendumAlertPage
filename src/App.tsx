@@ -39,7 +39,7 @@ const features: Feature[] = [
   {
     icon: BarChart3,
     title: "Useful context",
-    desc: "Conviction, voting power (DOT/KSM), short address, and links.",
+    desc: "Conviction, voting power (DOT/KSM), voter address, and links.",
   },
   {
     icon: ShieldCheck,
@@ -53,20 +53,24 @@ const features: Feature[] = [
   },
 ];
 
-const commands = [
-  { cmd: "/watch <id>", desc: "Start watching a referendum" },
-  { cmd: "/unwatch <id>", desc: "Stop watching a referendum" },
-  { cmd: "/list", desc: "Show what this chat is watching" },
-  { cmd: "/clear", desc: "Unsubscribe from all" },
-  { cmd: "/id", desc: "Show this chat ID" },
-];
+const commandText = [
+  "/watch <id> [dot|ksm] — start watching (default dot)",
+  "/watchdot <id> — start watching on Polkadot",
+  "/watchksm <id> — start watching on Kusama",
+  "/unwatch <id> [dot|ksm] — stop watching (no chain = both)",
+  "/list — list what you watch (with chain)",
+  "/clear — unsubscribe all (both chains)",
+  "/id — show this chat id",
+  "/help — show this message",
+].join("\n");
 
 function Hero() {
   return (
     <section className={styles.hero}>
       <div className={styles.heroInner}>
         <span className={styles.badge}>
-          <Bell size={16} /> Referendum Alert — Polkadot & Kusama
+          <Bell size={16} />
+          Referendum Alert
         </span>
         <motion.h1
           initial={{ opacity: 0, y: 8 }}
@@ -89,7 +93,6 @@ function Hero() {
           >
             <FaTelegramPlane size={18} /> Start in Telegram
           </a>
-
           <a href="#how" className={styles.secondaryCta}>
             See how it works <ChevronRight size={16} />
           </a>
@@ -124,10 +127,9 @@ function Features() {
 }
 
 function CopyableCommands() {
-  const text = commands.map((c) => `${c.cmd} — ${c.desc}`).join("\n");
   const onCopy = async () => {
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(commandText);
       alert("Commands copied!");
     } catch {}
   };
@@ -139,7 +141,7 @@ function CopyableCommands() {
           <Copy size={14} /> Copy
         </button>
       </div>
-      <pre>{text}</pre>
+      <pre>{commandText}</pre>
     </div>
   );
 }
@@ -169,7 +171,8 @@ function HowItWorks() {
               <div>
                 <b>Watch a referendum</b>
                 <p>
-                  Send <code>/watch &lt;id&gt;</code> (e.g., <code>1759</code>).
+                  Send <code>/watch &lt;id&gt; [dot|ksm]</code> (e.g.,{" "}
+                  <code>/watch 1759 dot</code>).
                 </p>
               </div>
             </li>
@@ -245,8 +248,8 @@ function FAQ() {
       <details>
         <summary>What information do alerts include?</summary>
         <p>
-          Aye/Nay/Abstain, conviction, voter short address, voting power
-          (DOT/KSM), and a link to explorers (e.g., Polkassembly/Subscan).
+          Aye/Nay/Abstain, conviction, voter address, voting power (DOT/KSM),
+          and a link to explorers.
         </p>
       </details>
       <details>
